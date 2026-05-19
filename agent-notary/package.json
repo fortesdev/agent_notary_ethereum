@@ -1,0 +1,25 @@
+{
+  "name": "agent-notary",
+  "version": "0.2.0",
+  "description": "Agent Notary — on-chain interaction witnessing for AI agents (security-fixed)",
+  "scripts": {
+    "compile":         "hardhat compile",
+    "test":            "hardhat test",
+    "test:gas":        "REPORT_GAS=true hardhat test",
+    "deploy:sepolia":  "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:base":     "hardhat run scripts/deploy.js --network base",
+    "deploy:arbitrum": "hardhat run scripts/deploy.js --network arbitrum"
+  },
+  "devDependencies": {
+    "hardhat":                              "^2.22.0",
+    "@nomicfoundation/hardhat-toolbox":     "^4.0.0",
+    "@openzeppelin/contracts":              "^5.0.0",
+    "@ethereum-attestation-service/eas-contracts": "^0.28.0",
+    "dotenv":                               "^16.0.0",
+    "typescript":                           "^5.0.0",
+    "ethers":                               "^6.0.0",
+    "json-stable-stringify":                "^1.1.1",
+    "@types/json-stable-stringify":         "^1.0.36"
+  },
+  "type": "commonjs"
+}

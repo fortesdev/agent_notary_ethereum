@@ -1,0 +1,49 @@
+specVersion: 0.0.5
+schema:
+  file: ../../../goldsky/schema.graphql
+dataSources:
+  - kind: ethereum
+    name: NotaryCore
+    network: base # or sepolia / arbitrum
+    source:
+      address: "0x..." # Replace after deployment
+      abi: NotaryCore
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Agent
+        - Interaction
+      abis:
+        - name: NotaryCore
+          file: ../artifacts/contracts/NotaryCore.sol/NotaryCore.json
+      eventHandlers:
+        - event: HashSubmitted(indexed bytes32,indexed address,uint8)
+          handler: handleHashSubmitted
+        - event: WitnessedAttestation(indexed bytes32,indexed address,indexed address,bytes32,bytes32)
+          handler: handleWitnessed
+        - event: FailureAttestation(indexed bytes32,indexed address,indexed address,bytes32)
+          handler: handleFailure
+      file: ./src/mappings.ts
+  - kind: ethereum
+    name: AuthorityRegistry
+    network: base
+    source:
+      address: "0x..."
+      abi: AuthorityRegistry
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Permission
+      abis:
+        - name: AuthorityRegistry
+          file: ../artifacts/contracts/AuthorityRegistry.sol/AuthorityRegistry.json
+      eventHandlers:
+        - event: PermissionRegistered(indexed address,indexed address,uint64)
+          handler: handlePermissionRegistered
+      file: ./src/mappings.ts
